@@ -1,0 +1,13 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: example-08-qm8-route
+spec:
+  host: fundtransferchl.chl.mq.ibm.com
+  to:
+    kind: Service
+    name: fundtransfer-ibm-mq
+  port:
+    targetPort: 1414
+  tls:
+    termination: passthrough

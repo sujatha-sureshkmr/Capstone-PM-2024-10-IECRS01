@@ -1,218 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="utf-8">
-      <meta content="width=device-width, initial-scale=1.0" name="viewport">
-      <title>Hi Nuts!</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
-      <meta content="" name="description">
-      <meta content="" name="keywords">
-      <!-- Favicons -->
-      <link href="static/img/favicon.png" rel="icon">
-      <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
-      <!-- Google Fonts -->
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-      <!-- Vendor CSS Files -->
-      <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-      <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-      <link href="static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-      <link href="static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-      <link href="static/vendor/aos/aos.css" rel="stylesheet">
-      <!-- Template Main CSS File -->
-      <link href="static/css/main.css" rel="stylesheet">
-      <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-      <!-- =======================================================
-         * Template Name: PhotoFolio
-         * Updated: May 30 2023 with Bootstrap v5.3.0
-         * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
-         * Author: BootstrapMade.com
-         * License: https://bootstrapmade.com/license/
-         ======================================================== -->
-   </head>
-   <body>
-      <!-- ======= Header ======= -->
-      <header id="header" class="header d-flex align-items-center fixed-top">
-         <div class="container-fluid d-flex align-items-center justify-content-between">
-            <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
-               <!-- Uncomment the line below if you also wish to use an image logo -->
-               <!-- <img src="static/img/logo.png" alt=""> -->
-               <i class="bi bi-camera"></i>
-               <h1>Hi Nuts!</h1>
-            </a>
-          
 
-            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
-            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
-         </div>
-      </header>
-      <!-- End Header -->
-      <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col-lg-6 text-center">
-                  <h2><span>Hi Nuts!</span></h2>
-                  <p>Image Recognition with precision</p>
-                  <!-- commented for future usage -->
-                  <!--<a href="contact.html" class="btn-get-started">Available for hire</a> -->
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- ======= Hero Section ======= -->
-      <section id="upload" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
-         <div class="container">
-            <div class="row justify-content-center">
-               <div class="col-lg-6 text-center">
-                  <h1>File Upload</h1>
-                  <h3>Drop files in the box below</h3>
-                  <form action="{{ url_for('upload_files') }}" class="dropzone" >
-                  </form>
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
-               </div>
-            </div>
-         </div>
-		 <p></p>
-		 <div>
-         
-         <form action="{{url_for('request_recognition')}}" method="post">
-            <h3>Select Object Detection Model :
-            <select name=sel_objdmodel method="GET" action="/">
-               <h3>Select Object Detection Model : </h3>
-                           {% for objdmodel in objdmodels %}
-                           <option value= "{{objdmodel}}" >{{ objdmodel }}</option>"
-                           {% endfor %}
-                           
-                           
-            </select></h3>
-            <br><br>
-            <h3>Select Segmentation Model : 
-       
-        <select name=sel_segmodels method="GET" action="/">
-         <h3>Select Object Detection Model : </h3>
-               {% for segmodel in segmodels %}
-               
-               <option value= "{{segmodel}}">{{ segmodel }}</option>"
-               {% endfor %}
-      </select></h3><br><br>
-        
-      <input type = "submit" class="btn btn-primary" name = "submit" value = "Submit" />
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../static/vendor/bootstrap/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+</head>
 
-</form>
-		
-		</div>
-		 <p></p>
-		 <!--<form action="{{ url_for('request_recognition') }}" method="post">
-		   <input type = "submit" class="btn btn-primary" name = "submit" value = "Submit" />
-		 </form>
-		 <button type="submit" class="btn btn-primary" action="{{ url_for('request_recognition') }}">Submit</button>-->
-      
-      </section>
-	 <!-- End Hero Section -->
-      <main id="main" data-aos="fade" data-aos-delay="1500">
-	  <section id="gallery" class="gallery">
-	  
-	  <div class="row">
-	  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
-	  <h3>Original</h3>
-		{% for hist in hists %}
-		<img src="{{hist}}" alt="{{hist}}"    
-		  class="w-100 shadow-1-strong rounded mb-4"
-		  alt="Wintry Mountain Landscape" />
-		
-		{% endfor %}
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="../index.html">NUS Capstone 2024</a>
 
-	  </div>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <a class="navbar-brand ps-3" href="../index.html">Intelligent EV Parts Component Retrieval System (IECRS)</a>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        
+                        <div class="sb-sidenav-menu-heading">AI Engineer Module</div>
+                        <a class="nav-link" href="content.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            AI Engineer Guide
+                        </a>
+                        <a class="nav-link" href="content.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Document Processing
+                        </a>
+                        <a class="nav-link" href="index-cp4i-ft.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Model Training
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Mech Enginner Module</div>
+                        <a class="nav-link" href="logonInformation.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Mech Engineer Guide
+                        </a>
+                        <a class="nav-link" href="logonInformation.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Chatbot - Manual
+                        </a>
+                        <a class="nav-link" href="logonInformation.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Chatbot - LLM
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">NUS ISS Capstone 2024 PT</div>
+                    <div class="small">Group 1</div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Intelligent EV Parts Component Retrieval System (IECRS)</h1>
 
-	  <div class="col-lg-4 mb-4 mb-lg-0">
-	  <h3>Prediction</h3>
-		{% for recgs in recgs %}
-		<img src="{{recgs}}" alt="{{recgs}}"    
-		  class="w-100 shadow-1-strong rounded mb-4"
-		  alt="Wintry Mountain Landscape" />
-		
-		{% endfor %}
-	  </div>
-
-	  <div class="col-lg-4 mb-4 mb-lg-0">
-	  <h3>Segmentation</h3>
-		{% for segment in segment %}
-		<img src="{{segment}}" alt="{{segment}}"    
-		  class="w-100 shadow-1-strong rounded mb-4"
-		  alt="Wintry Mountain Landscape" />
-		
-		{% endfor %}
-	  </div>
-     <div>
-    {% for table in tables %}
-        <table width="80%">
-            <thead>
-                <tr>
-                </tr>
-            </thead>
-            <tbody>
-                {{ table|safe }}
-            </tbody>
-        </table>
-    {% endfor %}
-   </div>
-	</div>
-         <!-- ======= Gallery Section ======= 
-         <section id="gallery" class="gallery"> 
-            <div class="container-fluid">
-               <div class="row gy-4 justify-content-center">
-                  <div class="col-xl-3 col-lg-4 col-md-6">
-                     <div class="gallery-item h-100">
-                        <div class='card-group'>
-                           {% for hist in hists %}
-                           <div class="card" >
-                              <div class="card-body">
-                                 <img src="{{hist}}" alt="{{hist}}"  class="img-fluid" >
-                                 <div class="gallery-links d-flex align-items-center justify-content-center">
-                                    <a href="assets/img/gallery/gallery-1.jpg" title="Gallery 1" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
-                                    <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
-                                 </div>
-                              </div>
-                              {% endfor %}
-                           </div>
+                    <ol class="breadcrumb mb-4">
+                        <!--<li class="breadcrumb-item active">
+                            <h4>Executive Summary</h4>
+                        </li>-->
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-book-open"></i>
+                            Intelligent EV Parts Component Retrieval System (IECRS)  </br> <b>Authors: Sujatha Sureshkumar, Tan Jun Ming, Gwen Foong Yuet Yan</b>
+                        
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </div> -->
-         </section>
-		 
-         <!-- End Gallery Section -->
-      </main>
-      <!-- End #main -->
-      <!-- ======= Footer ======= -->
-      <footer id="footer" class="footer">
-         <div class="container">
-            <div class="copyright">
-               &copy; Copyright <strong><span>Hi Nuts!</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-               <!-- All the links in the footer should remain intact. -->
-               <!-- You can delete the links only if you purchased the pro version. -->
-               <!-- Licensing information: https://bootstrapmade.com/license/ -->
-               <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/ -->
-               Designed by <a href="https://bootstrapmade.com/">Hi Nuts!</a>
-            </div>
-         </div>
-      </footer>
-      <!-- End Footer -->
-      <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-      <div id="preloader">
-         <div class="line"></div>
-      </div>
-      <!-- Vendor JS Files -->
-      <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-      <script src="static/vendor/swiper/swiper-bundle.min.js"></script>
-      <script src="static/vendor/glightbox/js/glightbox.min.js"></script>
-      <script src="static/vendor/aos/aos.js"></script>
-      <script src="static/vendor/php-email-form/validate.js"></script>
-      <!-- Template Main JS File -->
-      <script src="static/js/main.js"></script>
-   </body>
+                        <div class="card-body">
+                            <div>
+
+
+                            </div>
+                            <div>
+                                 <p class="lead"><b>Overview</b></p>
+                                 <p class="lead">The Intelligent EV Parts Component Retrieval System (IECRS), aimed at revolutionizing electric vehicle (EV) maintenance. This project addresses the challenge of efficiently retrieving sub-components from EV batteries by building a knowledge graph from existing resources such as text manuals and graphical images. Real-world statistics emphasize the growing complexity of EV batteries, highlighting the need for an intelligent system. The project unfolds in three phases: Team Project Proposal, Detailed Project Proposal, and Technical Paper & Report, with a focus on creating an interface that facilitates user prompts for efficient sub-component retrieval. </p>
+                    
+                                <p class="lead">The process involves extract relevant information from existing text manuals (using NLP) and 2D images (using scene partition / object detection) to construct a comprehensive knowledge graph of EV Parts components. 
+                                </p>
+                                <ol>
+                                    <li class="lead">
+                                        <p>The sample of the disassembly manual from battery OEM is as shown in the figure below. It consists of both text instructions as well as graphical images. </p>
+                                        <img src="../static/vendor/img/img_introduction_1.png" alt="Usecase" class="center" width="700"
+                                        height="400" />
+                                    </li>
+                                    <li class="lead">
+                                        <p>A typical text instruction and 2D exploded view image is as shown in the figure below respectively.</p>
+                                        <img src="../static/vendor/img/img_introduction_3.png" alt="Usecase" class="center" width="700"
+                                        height="400" />
+                                        <img src="../static/vendor/img/img_introduction_4.png" alt="Usecase" class="center" width="700"
+                                        height="400" />
+                                    </li>
+                                    <li class="lead">
+                                        <p>The knowledge graph to be constructed will be similar to the one as shown in Figure 1(b). The nodes will be the different sub-components in the EV battery while the linkages between nodes could be sequential relationship between then (i.e. which component needs to be removed before getting access to it).</p>
+                                        <img src="../static/vendor/img/img_introduction_2.png" alt="Usecase" class="center" width="700"
+                                        height="400" />
+                                    </li>
+                                </ol>
+
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+
+                  
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; NUS-ISS</div>
+                        <div>
+                            <a href="https://nus.edu.sg/ormc/compliance/personal-data-protection-at-nus/nus-privacy-notice">Privacy Policy</a>
+                            &middot;
+                            <a href="https://www.nus.edu.sg/uhc/terms-conditions">Terms of use</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+</body>
+
 </html>

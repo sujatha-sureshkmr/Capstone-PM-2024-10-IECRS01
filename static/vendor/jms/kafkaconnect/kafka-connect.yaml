@@ -1,0 +1,74 @@
+apiVersion: eventstreams.ibm.com/v1beta2
+kind: KafkaConnect
+metadata:
+  name: ft-mq-evs-cluster
+  annotations:
+    eventstreams.ibm.com/use-connector-resources: "true"
+spec:
+  replicas: 1
+  bootstrapServers: ft-eventstreams-kafka-bootstrap.cp4i.svc:9093
+  build:
+    output:
+      image: default-route-openshift-image-registry.apps.daffy-5hrao4ff.cloud.techzone.ibm.com/cp4i/kafkaconnectwithmq:latest
+      type: docker
+      pushSecret: cp4i-image-stream
+    plugins:
+      - artifacts:
+          - type: jar
+            url: >-
+              https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v1.3.2/kafka-connect-mq-source-1.3.2-jar-with-dependencies.jar
+            sha512sum: fdfde75c42698be06f96c780b5fd42759e1f79dc7a099b32466a32bdd795d3e00a754e6844dd40207174e787d680d5356dc3710d53d55d80d3cdf1d0c8382514
+        name: mq-source
+  template:
+    buildConfig:
+      pullSecret: cp4i-image-stream
+    pod:
+      imagePullSecrets:
+        - name: cp4i-image-stream
+      metadata:
+        annotations:
+          eventstreams.production.type: CloudPakForIntegrationNonProduction
+          productID: 2a79e49111f44ec3acd89608e56138f5
+          productName: IBM Event Streams for Non Production
+          productVersion: 11.2.4
+          productMetric: VIRTUAL_PROCESSOR_CORE
+          productChargedContainers: ft-mq-evs-cluster-connect
+          cloudpakId: c8b82d189e7545f0892db9ef2731b90d
+          cloudpakName: IBM Cloud Pak for Integration
+          productCloudpakRatio: "2:1"
+        # enable connectors to read config from secrets
+    config.providers: file
+    config.providers.file.class: org.apache.kafka.common.config.provider.DirectoryConfigProvider
+  resources:
+  requests:
+    cpu: 1000m
+    memory: 2Gi
+  limits:
+    cpu: 2000m
+    memory: 2Gi
+  externalConfiguration:
+    volumes:
+      - name: event-admin
+        secret:
+          secretName: event-admin
+      - name: tls.crt
+        secret:
+          secretName: nativehacert
+      - name: tls.key
+        secret:
+          secretName: nativehacert
+      - name: ftapp.crt
+        secret:
+          secretName: ftapp-secret
+  tls:
+  trustedCertificates:
+      - secretName: ft-evs-cred
+        certificate: ca.crt
+  authentication:
+    type: tls
+    certificateAndKey:
+      certificate: user.crt
+      key: user.key
+      secretName: ft-evs-cred
+
+
