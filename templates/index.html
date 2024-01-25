@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta content="width=device-width, initial-scale=1.0" name="viewport">
+      <title>Hi Nuts!</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.css">
+      <meta content="" name="description">
+      <meta content="" name="keywords">
+      <!-- Favicons -->
+      <link href="static/img/favicon.png" rel="icon">
+      <link href="static/img/apple-touch-icon.png" rel="apple-touch-icon">
+      <!-- Google Fonts -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600;1,700&family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Cardo:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+      <!-- Vendor CSS Files -->
+      <link href="static/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <link href="static/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+      <link href="static/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
+      <link href="static/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
+      <link href="static/vendor/aos/aos.css" rel="stylesheet">
+      <!-- Template Main CSS File -->
+      <link href="static/css/main.css" rel="stylesheet">
+      <script class="jsbin" src="https://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+      <!-- =======================================================
+         * Template Name: PhotoFolio
+         * Updated: May 30 2023 with Bootstrap v5.3.0
+         * Template URL: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/
+         * Author: BootstrapMade.com
+         * License: https://bootstrapmade.com/license/
+         ======================================================== -->
+   </head>
+   <body>
+      <!-- ======= Header ======= -->
+      <header id="header" class="header d-flex align-items-center fixed-top">
+         <div class="container-fluid d-flex align-items-center justify-content-between">
+            <a href="index.html" class="logo d-flex align-items-center  me-auto me-lg-0">
+               <!-- Uncomment the line below if you also wish to use an image logo -->
+               <!-- <img src="static/img/logo.png" alt=""> -->
+               <i class="bi bi-camera"></i>
+               <h1>Hi Nuts!</h1>
+            </a>
+          
+
+            <i class="mobile-nav-toggle mobile-nav-show bi bi-list"></i>
+            <i class="mobile-nav-toggle mobile-nav-hide d-none bi bi-x"></i>
+         </div>
+      </header>
+      <!-- End Header -->
+      <section id="hero" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-6 text-center">
+                  <h2><span>Hi Nuts!</span></h2>
+                  <p>Image Recognition with precision</p>
+                  <!-- commented for future usage -->
+                  <!--<a href="contact.html" class="btn-get-started">Available for hire</a> -->
+               </div>
+            </div>
+         </div>
+      </section>
+      <!-- ======= Hero Section ======= -->
+      <section id="upload" class="hero d-flex flex-column justify-content-center align-items-center" data-aos="fade" data-aos-delay="1500">
+         <div class="container">
+            <div class="row justify-content-center">
+               <div class="col-lg-6 text-center">
+                  <h1>File Upload</h1>
+                  <h3>Drop files in the box below</h3>
+                  <form action="{{ url_for('upload_files') }}" class="dropzone" >
+                  </form>
+                  <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
+               </div>
+            </div>
+         </div>
+		 <p></p>
+		 <div>
+         
+         <form action="{{url_for('request_recognition')}}" method="post">
+            <h3>Select Object Detection Model :
+            <select name=sel_objdmodel method="GET" action="/">
+               <h3>Select Object Detection Model : </h3>
+                           {% for objdmodel in objdmodels %}
+                           <option value= "{{objdmodel}}" >{{ objdmodel }}</option>"
+                           {% endfor %}
+                           
+                           
+            </select></h3>
+            <br><br>
+            <h3>Select Segmentation Model : 
+       
+        <select name=sel_segmodels method="GET" action="/">
+         <h3>Select Object Detection Model : </h3>
+               {% for segmodel in segmodels %}
+               
+               <option value= "{{segmodel}}">{{ segmodel }}</option>"
+               {% endfor %}
+      </select></h3><br><br>
+        
+      <input type = "submit" class="btn btn-primary" name = "submit" value = "Submit" />
+
+</form>
+		
+		</div>
+		 <p></p>
+		 <!--<form action="{{ url_for('request_recognition') }}" method="post">
+		   <input type = "submit" class="btn btn-primary" name = "submit" value = "Submit" />
+		 </form>
+		 <button type="submit" class="btn btn-primary" action="{{ url_for('request_recognition') }}">Submit</button>-->
+      
+      </section>
+	 <!-- End Hero Section -->
+      <main id="main" data-aos="fade" data-aos-delay="1500">
+	  <section id="gallery" class="gallery">
+	  
+	  <div class="row">
+	  <div class="col-lg-4 col-md-12 mb-4 mb-lg-0">
+	  <h3>Original</h3>
+		{% for hist in hists %}
+		<img src="{{hist}}" alt="{{hist}}"    
+		  class="w-100 shadow-1-strong rounded mb-4"
+		  alt="Wintry Mountain Landscape" />
+		
+		{% endfor %}
+
+	  </div>
+
+	  <div class="col-lg-4 mb-4 mb-lg-0">
+	  <h3>Prediction</h3>
+		{% for recgs in recgs %}
+		<img src="{{recgs}}" alt="{{recgs}}"    
+		  class="w-100 shadow-1-strong rounded mb-4"
+		  alt="Wintry Mountain Landscape" />
+		
+		{% endfor %}
+	  </div>
+
+	  <div class="col-lg-4 mb-4 mb-lg-0">
+	  <h3>Segmentation</h3>
+		{% for segment in segment %}
+		<img src="{{segment}}" alt="{{segment}}"    
+		  class="w-100 shadow-1-strong rounded mb-4"
+		  alt="Wintry Mountain Landscape" />
+		
+		{% endfor %}
+	  </div>
+     <div>
+    {% for table in tables %}
+        <table width="80%">
+            <thead>
+                <tr>
+                </tr>
+            </thead>
+            <tbody>
+                {{ table|safe }}
+            </tbody>
+        </table>
+    {% endfor %}
+   </div>
+	</div>
+         <!-- ======= Gallery Section ======= 
+         <section id="gallery" class="gallery"> 
+            <div class="container-fluid">
+               <div class="row gy-4 justify-content-center">
+                  <div class="col-xl-3 col-lg-4 col-md-6">
+                     <div class="gallery-item h-100">
+                        <div class='card-group'>
+                           {% for hist in hists %}
+                           <div class="card" >
+                              <div class="card-body">
+                                 <img src="{{hist}}" alt="{{hist}}"  class="img-fluid" >
+                                 <div class="gallery-links d-flex align-items-center justify-content-center">
+                                    <a href="assets/img/gallery/gallery-1.jpg" title="Gallery 1" class="glightbox preview-link"><i class="bi bi-arrows-angle-expand"></i></a>
+                                    <a href="gallery-single.html" class="details-link"><i class="bi bi-link-45deg"></i></a>
+                                 </div>
+                              </div>
+                              {% endfor %}
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div> -->
+         </section>
+		 
+         <!-- End Gallery Section -->
+      </main>
+      <!-- End #main -->
+      <!-- ======= Footer ======= -->
+      <footer id="footer" class="footer">
+         <div class="container">
+            <div class="copyright">
+               &copy; Copyright <strong><span>Hi Nuts!</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+               <!-- All the links in the footer should remain intact. -->
+               <!-- You can delete the links only if you purchased the pro version. -->
+               <!-- Licensing information: https://bootstrapmade.com/license/ -->
+               <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/photofolio-bootstrap-photography-website-template/ -->
+               Designed by <a href="https://bootstrapmade.com/">Hi Nuts!</a>
+            </div>
+         </div>
+      </footer>
+      <!-- End Footer -->
+      <a href="#" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+      <div id="preloader">
+         <div class="line"></div>
+      </div>
+      <!-- Vendor JS Files -->
+      <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+      <script src="static/vendor/swiper/swiper-bundle.min.js"></script>
+      <script src="static/vendor/glightbox/js/glightbox.min.js"></script>
+      <script src="static/vendor/aos/aos.js"></script>
+      <script src="static/vendor/php-email-form/validate.js"></script>
+      <!-- Template Main JS File -->
+      <script src="static/js/main.js"></script>
+   </body>
+</html>
