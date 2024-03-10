@@ -11,6 +11,17 @@
     <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
     <link href="../static/vendor/bootstrap/css/styles.css" rel="stylesheet" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,700">
+    <title>Upload images using Python and Flask</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
 </head>
 
 <body class="sb-nav-fixed">
@@ -80,12 +91,51 @@
                         
                         </div>
                         <div class="card-body">
-                           
-                            <div>
-                                 <p class="lead"><b>Document Processing</b></p>
-                                 <p class="lead"><b>Model Training</b></p>
+                            <div class="signup-form" style="margin-top: 50px;">
+                                <form method="post" action="/aidocumentprocessing.html" enctype="multipart/form-data">
+                                <h5>Upload files using Python and Flask</h5>
+                                <div class="form-group">
+                                    {% if msg %}
+                                    <div class="alert alert-info" role="alert">
+                                        <ul><li>{{ msg }}</li></ul>
+                                    </div>
+                                    {% endif %}
+                                    <div class="ui-widget">
+                                        <label for="tags">Upload File(s):</label></div><br>
+                                        <form>
+                                            <div class="form-row">
+                                              <div class="col-md-4 mb-3">
+                                                <label for="validationDefault01">Product Type</label>
+                                                <input type="text" name='Product_Type' class="form-control" id="Product_Type" placeholder="Product Type" value="EVB" required>
+                                              </div>
+                                              <div class="col-md-4 mb-3">
+                                                <label for="validationDefault02">Product Manufacturer</label>
+                                                <input type="text"  name='Product_Manufacturer' class="form-control" id="Product_Manufacturer" placeholder="Product Manufacturer" value="Nissan" required>
+                                              </div>
+                                              <div class="col-md-4 mb-3">
+                                                <label for="validationDefault02">Manufactured Year</label>
+                                                <input type="text"  name='Product_Manufactured_Year'  class="form-control" id="Product_Manufactured_Year" placeholder="Manufactured Year" value="2013" required>
+                                              </div>
+                                            </div>
+                                            <div class="form-row">
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationDefault01">Page From</label>
+                                                    <input type="text" name='page_from' class="form-control" id="page_from" placeholder="Page From" value="1" required>
+                                                </div>
 
-                            </div>
+                                                <div class="col-md-4 mb-3">
+                                                    <label for="validationDefault01">Page To</label>
+                                                    <input type="text" name='page_to' class="form-control" id="page_to" placeholder="Page To" value="75" required>
+                                                </div>
+                                            </div>
+                                        </form>
+                                        <input type="file" class="form-control" name="file" placeholder="select a file to upload" required>
+                                        <br />
+                                        <input type="submit" name="submit" class="btn btn-success btn-lg btn-block" value="Upload File(s)">
+                                    </div>
+                                </div>
+                                </form>
+                            
 
                             
                         </div>
