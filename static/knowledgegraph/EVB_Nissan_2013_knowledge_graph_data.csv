@@ -1,0 +1,38 @@
+heading_1,heading_2,guide_text,rId,image_name,heading_3,heading_9,warning,caution
+unit disassembly and assembly - li-ion battery,,,,,,,,
+unit disassembly and assembly - li-ion battery,,,rId8,image3.png,,,,
+unit disassembly and assembly - li-ion battery,,Service plug,,,,,,
+unit disassembly and assembly - li-ion battery,,Service plug retainer,rId11,image4.png,,,,
+unit disassembly and assembly - li-ion battery,,Battery pack upper case,rId12,image5.png,,,,
+unit disassembly and assembly - li-ion battery,,Seal,,,,,,
+unit disassembly and assembly - li-ion battery,,Plug,rId13,image6.png,,,,
+unit disassembly and assembly - li-ion battery,,Plug washer,rId14,image7.png,,,,
+unit disassembly and assembly - li-ion battery,,Breather,rId15,image8.png,,,,
+unit disassembly and assembly - li-ion battery,,Battery pack case side,rId16,image9.png,,,,
+unit disassembly and assembly - li-ion battery,,Always replace after every disas- sembly.,,,,,,
+unit disassembly and assembly - li-ion battery,,"N·m (kg-m, in-lb)",rId18,image11.png,,,,
+unit disassembly and assembly - li-ion battery,,"N·m (kg-m, ft-lb)",rId19,image12.png,,,,
+battery pack upper case  removal and installation,,,,,,,,
+battery pack upper case  removal and installation,,"Since hybrid vehicles and electric vehicles contain a high voltage battery, there is the risk of electric shock, electric leakage, or similar accidents if the high voltage component and vehicle are handled incorrectly. Be sure to follow the correct work procedures when performing inspection and maintenance.",,,,,,
+1,,Be sure to remove the service plug in order to shut off the high voltage circuits before performing inspection or maintenance of high voltage system harnesses and parts.,,,,,warning,
+1,,Be sure to put the removed service plug in pocket and carry it or store it in a tool box or other con- tainer so that another person does not accidentally connect it while work is in progress.,,,,,warning,
+1,,Be sure to put on insulating protective gear before beginning work on the high voltage system.,,,,,warning,
+1,,"Clearly identify the persons responsible for high voltage work and ensure that other persons do not touch the vehicle. When not working, cover high voltage components with an anti-static cover sheet or similar item to prevent contact with other persons.",,,,,warning,
+1,,"Refer to EVB-6, ""High Voltage Precautions"".",,,,,warning,
+1,,"If the battery pack is to be disassembled, be sure to remove the Li-ion battery controller for prevent- ing electric shock, fire, and damage to parts.",,,,,warning,
+1,,There is the possibility of a malfunction occurring if the vehicle is changed to READY status while the service plug is removed. Therefore do not change the vehicle to READY status unless instructed to do so in the Service Manual.,,,,,,caution
+1,,Must be an indoor environment.,,,,,,caution
+1,,"The environment must utilize a shutter or other means to shut out the outside environment and prevent rain, snow, dust, or other substances from entering.",,,,,,caution
+1,,"The environment must not cause the intrusion of sweat during work, or cause condensation to occur due to high temperature or humidity.",,,,,,caution
+1,,"Metal powder, grease, and other foreign substances must not enter.",,,,,,caution
+1,,"The indoor environment must also prevent metal powder, grease, and other foreign substances from entering due to maintenance performed on other vehicles and other sources during disassembly work.",,,,,,caution
+1,,"If there is a risk of the above substances entering, take appropriate countermeasures, such as use of a vinyl curtain or an equivalent to shut out the outside environment.",,,,,,caution
+1,,The floor must be dry.,,,,,,caution
+1,,The floor must not be wet as a result of factors such as vehicle entry during rain or snow.,,,,,,caution
+1,,Work space,,,,,,caution
+1,,The work space must be approximately the size of one entire vehicle.,,,,,,caution
+1,,"Take appropriate countermeasures so that persons other than the operator do not enter the work space, such as by placing signs indicating that disassembly work is in progress.",,,,,,caution
+1,,Standard fire fighting equipment,,,,,,caution
+1,,Always place a standard fire fighting equipment in the disassembly work area.,,,,,,caution
+1,,Depending on type of fire (vehicle or battery) use standard fire fighting equipment (water or extin- guisher).,,,,,,caution
+1,,,,,,,,caution

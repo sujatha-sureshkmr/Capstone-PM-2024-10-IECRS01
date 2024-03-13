@@ -5,6 +5,7 @@ import sys
 sys.path.insert(0, './pythonlib')
 from pdfsplitfile import pdfsplitter
 from pdf2contentintegrated import pdf2content_integrated
+from doc2contentintegrated import doc2content_integrated
 #from pdfsplitfile import pdfsplitter
 
 app = Flask(__name__)
@@ -64,13 +65,19 @@ def aidocumentprocessing():
                   file.save(os.path.join(app.config['PROCESSING'], source_filename_pdf))
                   pdfsplitter(os.path.join(app.config['PROCESSING'], source_filename_pdf), app.config['UPLOAD_DIR'],
                               source_filename_pdf, page_from, page_to)
-                  pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
-               
+                  if file_ext == 'pdf':
+                      pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                  else:
+                      doc2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
                else:
                   #filename = filename+f"
                   file.save(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf))
-                  pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
-               
+                  if file_ext == 'pdf':
+                     pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                  else:
+                     print(source_filename_pdf)
+                     doc2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                  
                #source_knowledge_graph = os.path.join(app.config['UPLOAD_DIR'], filename+"."+f"{file_ext}")
                #pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
                return render_template("aidocumentprocessing.html", msg="File uploaded successfully.")

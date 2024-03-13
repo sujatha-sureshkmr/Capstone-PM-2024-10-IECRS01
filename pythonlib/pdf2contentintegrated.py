@@ -16,7 +16,7 @@ class pdf2content_integrated:
         data = self.extract_text_with_style(self.pdf_file_path)
         print(data.shape)
         self.save_output(data,self.out_folder,self.filename+'_knowledge_graph_data.csv')
-
+        print(f"DataFrame saved to {self.filename}")
     def extract_text_with_style(self,pdf_file):
         df_data = []
         doc = fitz.open(pdf_file)
