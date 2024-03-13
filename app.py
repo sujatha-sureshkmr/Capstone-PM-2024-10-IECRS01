@@ -63,12 +63,12 @@ def aidocumentprocessing():
                #source_filename_image=f"{product_type}_{product_manufacturer}_{product_manufactured_year}_kg_image.csv"
                if page_checked == 'on':
                   file.save(os.path.join(app.config['PROCESSING'], source_filename_pdf))
-                  pdfsplitter(os.path.join(app.config['PROCESSING'], source_filename_pdf), app.config['UPLOAD_DIR'],
-                              source_filename_pdf, page_from, page_to)
                   if file_ext == 'pdf':
-                      pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                     pdfsplitter(os.path.join(app.config['PROCESSING'], source_filename_pdf), app.config['UPLOAD_DIR'],
+                                 source_filename_pdf, page_from, page_to)                      
+                     pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
                   else:
-                      doc2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                        doc2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
                else:
                   #filename = filename+f"
                   file.save(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf))
