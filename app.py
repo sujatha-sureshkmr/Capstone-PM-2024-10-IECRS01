@@ -4,11 +4,14 @@ import sys
 
 sys.path.insert(0, './pythonlib')
 from pdfsplitfile import pdfsplitter
+from pdf2contentintegrated import pdf2content_integrated
+#from pdfsplitfile import pdfsplitter
 
 app = Flask(__name__)
 
 app.config["UPLOAD_DIR"] = "static/uploads"
 app.config["PROCESSING"] = "static/processing"
+app.config["KNOWLEDGE_GRAPH"] = "static/knowledgegraph"
 
 ALLOWED_EXTENSIONS = {'doc', 'pdf', 'docx'}
 
@@ -52,17 +55,25 @@ def aidocumentprocessing():
                 return render_template("aidocumentprocessing.html", msg="No selected file")
             
             if file and allowed_file(file.filename):
-                file_ext = file.filename.rsplit('.', 1)[1].lower()
-                filename = f"{product_type}_{product_manufacturer}_{product_manufactured_year}.{file_ext}"
-                
-                if page_checked == 'on':
-                    file.save(os.path.join(app.config['PROCESSING'], filename))
-                    pdfsplitter(os.path.join(app.config['PROCESSING'], filename), app.config['UPLOAD_DIR'],
-                                filename, page_from, page_to)
-                else:
-                    file.save(os.path.join(app.config['UPLOAD_DIR'], filename))
-
-                return render_template("aidocumentprocessing.html", msg="File uploaded successfully.")
+               file_ext = file.filename.rsplit('.', 1)[1].lower()
+               filename = f"{product_type}_{product_manufacturer}_{product_manufactured_year}"
+               source_filename_pdf=f"{product_type}_{product_manufacturer}_{product_manufactured_year}.{file_ext}"
+               #source_filename_data=f"{product_type}_{product_manufacturer}_{product_manufactured_year}_kg_data.csv"
+               #source_filename_image=f"{product_type}_{product_manufacturer}_{product_manufactured_year}_kg_image.csv"
+               if page_checked == 'on':
+                  file.save(os.path.join(app.config['PROCESSING'], source_filename_pdf))
+                  pdfsplitter(os.path.join(app.config['PROCESSING'], source_filename_pdf), app.config['UPLOAD_DIR'],
+                              source_filename_pdf, page_from, page_to)
+                  pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+               
+               else:
+                  #filename = filename+f"
+                  file.save(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf))
+                  pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+               
+               #source_knowledge_graph = os.path.join(app.config['UPLOAD_DIR'], filename+"."+f"{file_ext}")
+               #pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+               return render_template("aidocumentprocessing.html", msg="File uploaded successfully.")
     except Exception as error:
         print("An exception occurred:", error)
         exc_type, fname, lineno = sys.exc_info()
