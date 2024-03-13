@@ -1,6 +1,7 @@
-from flask import Flask, render_template, redirect, url_for, request, flash
+from flask import Flask, render_template, request, flash
 import os
 import sys
+
 sys.path.insert(0, './pythonlib')
 from pdfsplitfile import pdfsplitter
 
@@ -10,81 +11,85 @@ app.config["UPLOAD_DIR"] = "static/uploads"
 app.config["PROCESSING"] = "static/processing"
 
 ALLOWED_EXTENSIONS = {'doc', 'pdf', 'docx'}
+
+
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
 
 @app.route('/')
 def index():
-    name='sujatha'
+    name = 'sujatha'
     return render_template('index.html')
+
 
 @app.route('/aienginnerguide.html')
 def aienginnerguide():
-   return render_template('aienginnerguide.html')
+    return render_template('aienginnerguide.html')
 
 
-@app.route("/upload", methods = ["GET", "POST"])
-def upload():
-    if request.method == 'POST':
-        file = request.files['file']
-        product_type = request.form["Product_Type"]
-        file.save(os.path.join(app.config['UPLOAD_DIR'], file.filename))
-        return render_template("aidocumentprocessing.html", msg = "File uplaoded successfully.")
-    return render_template("aidocumentprocessing.html", msg = "")
-
-
-@app.route('/aidocumentprocessing.html', methods = ["GET", "POST"])
+@app.route('/aidocumentprocessing.html', methods=["GET", "POST"])
 def aidocumentprocessing():
-   if request.method == 'POST':
-        product_type = request.form["Product_Type"]
-        product_manufacturer = request.form["Product_Manufacturer"]
-        product_manufactured_year = request.form["Product_Manufactured_Year"]
-        page_from = request.form["page_from"]
-        page_to = request.form["page_to"]
-         # check if the post request has the file part
-        if 'file' not in request.files:
-            flash('No file part')
-            return render_template("aidocumentprocessing.html", msg = "No file part'")
-        file = request.files['file']
-        # If the user does not select a file, the browser submits an
-        # empty file without a filename.
-        if file.filename == '':
-            flash('No selected file')
-            return render_template("aidocumentprocessing.html", msg = "No selected file")
-        if file and allowed_file(file.filename):
-            file_ext=file.filename.rsplit('.', 1)[1].lower()
-            #out_folder = os.path.join(app.config['UPLOAD_DIR'], filename)
-            filename=product_type+'_'+product_manufacturer+'_'+product_manufactured_year+'.'+file_ext
-            file.save(os.path.join(app.config['PROCESSING'], filename))
-            pdfsplitter(os.path.join(app.config['PROCESSING'], filename), app.config['UPLOAD_DIR'],filename,page_from, page_to) 
-            #file.save(os.path.join(app.config['UPLOAD_DIR'], filename))
-            return render_template("aidocumentprocessing.html", msg = "File uplaoded successfully.")
-        '''
-        file = request.files['file']
-        file_extention = filename.rsplit('.', 1)[1].lower()
+    try:
+        if request.method == 'POST':
+            product_type = request.form["Product_Type"]
+            product_manufacturer = request.form["Product_Manufacturer"]
+            product_manufactured_year = request.form["Product_Manufactured_Year"]
+            page_checked = request.form.get('checkbox_page')
+
+            if page_checked == 'on':
+                page_from = request.form["page_from"]
+                page_to = request.form["page_to"]
+
+            if 'file' not in request.files:
+                flash('No file part')
+                return render_template("aidocumentprocessing.html", msg="No file part'")
+            
+            file = request.files['file']
+            
+            if file.filename == '':
+                flash('No selected file')
+                return render_template("aidocumentprocessing.html", msg="No selected file")
+            
+            if file and allowed_file(file.filename):
+                file_ext = file.filename.rsplit('.', 1)[1].lower()
+                filename = f"{product_type}_{product_manufacturer}_{product_manufactured_year}.{file_ext}"
+                
+                if page_checked == 'on':
+                    file.save(os.path.join(app.config['PROCESSING'], filename))
+                    pdfsplitter(os.path.join(app.config['PROCESSING'], filename), app.config['UPLOAD_DIR'],
+                                filename, page_from, page_to)
+                else:
+                    file.save(os.path.join(app.config['UPLOAD_DIR'], filename))
+
+                return render_template("aidocumentprocessing.html", msg="File uploaded successfully.")
+    except Exception as error:
+        print("An exception occurred:", error)
+        exc_type, fname, lineno = sys.exc_info()
+        print(exc_type, fname, lineno)
         
-        file.save(os.path.join(app.config['UPLOAD_DIR'], file_name))
-        return render_template("aidocumentprocessing.html", msg = "File uplaoded successfully.")'''
-   return render_template("aidocumentprocessing.html", msg = "")
+    return render_template("aidocumentprocessing.html", msg="")
+
 
 @app.route('/aimodeltraining.html')
 def aimodeltraining():
-   return render_template('aimodeltraining.html')
+    return render_template('aimodeltraining.html')
+
 
 @app.route('/mechenginnerguide.html')
 def mechenginnerguide():
-   return render_template('mechenginnerguide.html')
+    return render_template('mechenginnerguide.html')
+
 
 @app.route('/mechchatbotmanual.html')
 def mechchatbotmanual():
-   return render_template('mechchatbotmanual.html')
- 
+    return render_template('mechchatbotmanual.html')
+
+
 @app.route('/mechchatbotllm.html')
 def mechchatbotllm():
-   return render_template('mechchatbotllm.html')
+    return render_template('mechchatbotllm.html')
+
 
 if __name__ == '__main__':
-   app.run()
-
-
+    app.run()
