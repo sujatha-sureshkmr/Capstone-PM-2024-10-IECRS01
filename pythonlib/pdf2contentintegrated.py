@@ -63,7 +63,7 @@ class pdf2content_integrated:
         return ordered_data
 
     def is_not_proper_word(self,word):
-        if word == "None" or word is None or pd.isna(word):
+        if word == "None" or word is None or pd.isna(word) or len(word.lstrip().rstrip()) == 1:
             return True
         word = re.sub(r'[^a-zA-Z0-9]', '', word)
         return not bool(re.match(r'^[a-zA-Z]+$', word))
@@ -83,7 +83,7 @@ class pdf2content_integrated:
                 print(f"Column '{col}' not found in df_expanded_span.")
         extracted_df = pd.DataFrame(data_dict)
         return extracted_df
-
+    '''
     def buildhierarchy(self,data_df):
         max_value = data_df['Header_style'].max()
         for i in range(0, max_value + 1):            
@@ -123,8 +123,44 @@ class pdf2content_integrated:
                     data_df.at[index,'Header_'+str(i)] = headers_df[i]
             old_number = para_style_number
         return data_df
+    '''
+    def buildhierarchy(self,data_df):
+        max_value = data_df['Header_style'].max()
 
+        headers_df = []
+        old_number_mod = 1
+        old_number = 1
 
+        for index, row in data_df.iterrows():
+            para_style_number = row['Header_style']
+            para_style_name = 'Header_' + str(para_style_number)
+
+            if para_style_number < max_value:
+                if para_style_number == 1:
+                    headers_df = [row['Text'].strip().replace(":", "").lower()]
+                elif para_style_number == old_number_mod:
+                    headers_df.pop()
+                    headers_df.append(row['Text'].strip().replace(":", "").lower())
+                elif para_style_number > old_number_mod:
+                    difference = para_style_number - old_number_mod
+                    headers_df.append(row['Text'].strip().replace(":", "").lower())
+                elif para_style_number < old_number_mod:
+                    difference = old_number_mod - para_style_number
+                    for i in range(difference):
+                        headers_df.pop()
+                    headers_df.append(row['Text'].strip().replace(":", "").lower())
+                
+                for i, header in enumerate(headers_df):
+                    data_df.at[index, f'Header_{i}'] = header
+
+                old_number_mod = para_style_number
+            else:
+                for i, header in enumerate(headers_df):
+                    data_df.at[index, f'Header_{i}'] = header
+
+            old_number = para_style_number
+        return data_df
+        
     def save_output(self,data, output_folder, filename):
         # Create the subfolder if it doesn't exist
         if not os.path.exists(output_folder):
