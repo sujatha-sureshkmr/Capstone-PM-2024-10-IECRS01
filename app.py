@@ -13,8 +13,9 @@ app = Flask(__name__)
 app.config["UPLOAD_DIR"] = "static/uploads"
 app.config["PROCESSING"] = "static/processing"
 app.config["KNOWLEDGE_GRAPH"] = "static/knowledgegraph"
+app.config["MODEL_DIR"] = "static/models"
 
-ALLOWED_EXTENSIONS = {'doc', 'pdf', 'docx'}
+ALLOWED_EXTENSIONS = {'pdf'}
 
 
 def allowed_file(filename):
@@ -66,14 +67,14 @@ def aidocumentprocessing():
                   if file_ext == 'pdf':
                      pdfsplitter(os.path.join(app.config['PROCESSING'], source_filename_pdf), app.config['UPLOAD_DIR'],
                                  source_filename_pdf, page_from, page_to)                      
-                     pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                     pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename,app.config["MODEL_DIR"])
                   else:
                         doc2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
                else:
                   #filename = filename+f"
                   file.save(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf))
                   if file_ext == 'pdf':
-                     pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)
+                     pdf2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename,app.config["MODEL_DIR"])
                   else:
                      print(source_filename_pdf)
                      doc2content_integrated(os.path.join(app.config['UPLOAD_DIR'], source_filename_pdf), app.config['KNOWLEDGE_GRAPH'],filename)

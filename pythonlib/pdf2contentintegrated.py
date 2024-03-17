@@ -5,8 +5,13 @@ import numpy as np
 from collections import Counter
 import csv
 import os
+import torch
+from imgdetocr import objectvisionizer
+
 class pdf2content_integrated:
-    def __init__(self,source_pdf_file_path,out_folder,filename):
+    def __init__(self,source_pdf_file_path,out_folder,filename,model_path):
+        self.model_path = os.path.join(model_path,'objdet.pth')
+        self.model = torch.load(self.model_path, torch.device('cpu'))
         self.pdf_file_path = source_pdf_file_path
         print('pdf2content_integrated_test')
         self.out_folder=out_folder
@@ -16,7 +21,6 @@ class pdf2content_integrated:
         data = self.extract_text_with_style(self.pdf_file_path)
         print(data.shape)
         self.save_output(data,self.out_folder,self.filename+'_knowledge_graph_data.csv')
-        print(f"DataFrame saved to {self.filename}")
     def extract_text_with_style(self,pdf_file):
         df_data = []
         doc = fitz.open(pdf_file)
@@ -174,11 +178,13 @@ class pdf2content_integrated:
         print(f"File saved successfully at {filepath}")
 
     def dataprep(self,data_df):
+        data_df['ocr_det_arr']=None
         data_df['Bbox'] = data_df.apply(lambda row: row['Span_Bbox'] if pd.isna(row['Width']) or row['Width'] == '' else row['Bbox'], axis=1)
         new_column_names = ['x0', 'y0', 'x1', 'y1']
         df_expanded = self.expand_list_column(data_df, 'Bbox', new_column_names)
-        df1_columns = ['pg_number', 'Number', 'Type', 'Bbox', 'Text', 'Size', 'Font', 'Color', 'Origin', 'Span_Bbox', 'x0', 'y0', 'x1', 'y1']
-        df2_columns = ['pg_number', 'Number', 'Type', 'Bbox', 'Span_Bbox', 'Width', 'Height', 'Ext', 'Colorspace', 'Xres', 'Yres', 'Bpc', 'Transform', 'Size', 'Image', 'x0', 'y0', 'x1', 'y1']
+        
+        df1_columns = ['pg_number', 'Number', 'Type', 'Bbox', 'Text', 'Size', 'Font', 'Color', 'Origin', 'Span_Bbox', 'x0', 'y0', 'x1', 'y1','ocr_det_arr']
+        df2_columns = ['pg_number', 'Number', 'Type', 'Bbox', 'Span_Bbox', 'Width', 'Height', 'Ext', 'Colorspace', 'Xres', 'Yres', 'Bpc', 'Transform', 'Size', 'Image', 'x0', 'y0', 'x1', 'y1','ocr_det_arr']
         df1 = self.extract_columns(df_expanded, df1_columns)
         df1 = df1[df_expanded['Text'].notna()]
         df1['image_name'] = np.NaN
@@ -186,9 +192,12 @@ class pdf2content_integrated:
         df2 = df2[(df2['Image']!='') & (df2['Image']!='None') & (df2['Image']!=None ) & (df2['Image'].notna())]
         df2['image_name'] = 'img_'+df2['pg_number'].astype(str)+'_'+df2['Number'].astype(str)
         #self.save_output(df2,"./knowledge_graph_files",'knowledge_graph_image.csv')
-        self.save_output(df2,self.out_folder,self.filename+'_knowledge_graph_image.csv')
         new_row_df = pd.DataFrame(columns=df1.columns)
         for index, row in df2.iterrows():
+            obj = objectvisionizer(row['Image'],self.model,'cpu')
+            ocr_det_arr = np.array(obj.crop_and_infer_cv2(row['Image'],self.model,'cpu'))
+            df2.at[index, 'ocr_det_arr'] = ocr_det_arr
+            print('row[image_name]',row['image_name'],ocr_det_arr)
             filtered_df1 = df1[(df1['pg_number'] == row['pg_number']) & (df1['y0'] <= row['y0']) & (df1['y1'] >= row['y0']) & (df1['x0'] >= row['x0']) & (df1['image_name'].isna())]
             filtered_df1 = filtered_df1.copy()
             filtered_df1['diff_x0'] = abs(filtered_df1['x0'] - row['x0'])
@@ -199,9 +208,14 @@ class pdf2content_integrated:
                 smallest_row_index = filtered_df1['diff_x0'].idxmin()
                 if not filtered_df1.loc[smallest_row_index].empty:
                     df1.loc[smallest_row_index ,'image_name'] = row['image_name']
+                    #print('row[image_name]',row['image_name'],ocr_det_arr)
+                    df1.at[smallest_row_index, 'ocr_det_arr'] = ocr_det_arr
+                    #df1.loc[smallest_row_index ,'ocr_det_arr'] = ocr_det_arr
                 else:
                     new_row_df = pd.DataFrame([row], columns=df1.columns).reset_index(drop=True)
                     df1 = pd.concat([df1, new_row_df], ignore_index=True)
+        
+        self.save_output(df2,self.out_folder,self.filename+'_knowledge_graph_image.csv')
         df1['Text'].fillna(value='Main Image', inplace=True) 
         df1['Size'].fillna(value=0, inplace=True) 
         df1['Font'].fillna(value='', inplace=True) 
