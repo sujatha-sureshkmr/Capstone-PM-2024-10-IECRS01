@@ -1,14 +1,3 @@
-<?php
-$script_output = shell_exec('ls /Users/sujathasureshkumar/Documents/GitHub/sujatha-sureshkmr.github.io/jms');
-?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Shell Script Output</title>
-</head>
-<body>
-    <h1>Shell Script Output:</h1>
-    <pre><?php echo $script_output; ?></pre>
-</body>
-</html>
+version https://git-lfs.github.com/spec/v1
+oid sha256:0a9ec682cb0358f14f2662d76a654d651eb1c263900091b2335f6b92c3acbf1a
+size 298

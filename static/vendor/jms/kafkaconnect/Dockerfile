@@ -1,7 +1,3 @@
-FROM cp.icr.io/cp/ibm-eventstreams-kafka:11.0.2
-
-USER root
-RUN mkdir -p /opt/kafka/plugins/
-RUN curl -Lo /opt/kafka/plugins/kafka-connect-mq-source.jar https://github.com/ibm-messaging/kafka-connect-mq-source/releases/download/v1.3.1/kafka-connect-mq-source-1.3.1-jar-with-dependencies.jar
-
-USER 1001
+version https://git-lfs.github.com/spec/v1
+oid sha256:9a63c3fb6c30225dfc9840a3e2b58d2a21919ae2b665a47b6651be529bd5b363
+size 301

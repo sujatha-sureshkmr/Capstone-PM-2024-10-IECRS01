@@ -1,19 +1,3 @@
-#!/bin/bash
-#
-#  (C) Copyright IBM Corp. 2021. All Rights Reserved.
-#
-# SPDX-License-Identifier: Apache-2.0
-#
-# Not for Production use. For demo and training only.
-#
-
-# Find the queue manager host name
-qmhostname=$(oc get route -n cp4i fundtransfer-ibm-mq-qm -o jsonpath="{.spec.host}")
-echo $qmhostname
-
-# Test:
-ping -c 3 $qmhostname
-
-# Run the JMS Put sample program
-java -Djavax.net.ssl.keyStoreType=jks -Djavax.net.ssl.keyStore=ftappkey.jks -Djavax.net.ssl.keyStorePassword=password -Djavax.net.ssl.trustStoreType=jks -Djavax.net.ssl.trustStore=trust.jks -Djavax.net.ssl.trustStorePassword=password -Dcom.ibm.mq.cfg.useIBMCipherMappings=false -cp ./lib/com.ibm.mq.allclient-9.2.4.0.jar:./lib/javax.jms-api-2.0.1.jar:./lib/json-20211205.jar:. com.ibm.mq.samples.jms.JmsGet
-
+version https://git-lfs.github.com/spec/v1
+oid sha256:7cd651d550d57daa50fb26824fb04a368fe2374d7d101ce386356f8b807c9879
+size 777
