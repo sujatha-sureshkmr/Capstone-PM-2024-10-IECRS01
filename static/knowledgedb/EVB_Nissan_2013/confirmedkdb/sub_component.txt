@@ -1,0 +1,10 @@
+Component - evb
+Component - service plug
+Component - service plug retainer
+Component - battery pack upper case
+Component - seal
+Component - plug
+Component - plug washer
+Component - breather
+Component - battery pack case side
+Component - : always replace every disa
