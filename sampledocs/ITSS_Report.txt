@@ -1,0 +1,108 @@
+1 Abstract
+The Intelligent Document Processing System, aimed at revolutionizing electric vehicle (EV) maintenance. This project addresses the challenge of efficiently retrieving sub-components from EV batteries by building a knowledge graph from existing resources such as text manuals and graphical images. Real-world statistics emphasize the growing complexity of EV batteries, highlighting the need for an intelligent system. The project unfolds in three phases: Team Project Proposal, Detailed Project Proposal, and Technical Paper & Report, with a focus on creating an interface that facilitates user prompts for efficient sub-component retrieval.
+The process involves extract relevant information from existing text manuals (using NLP) and 2D images (using scene partition / object detection) to construct a comprehensive knowledge graph of EV Parts components.
+The sample of the disassembly manual from battery OEM is as shown in the figure below. It consists of both text instructions as well as graphical images. A typical text instruction and 2D exploded view image is as shown in the figure below respectively. The knowledge graph to be constructed will be similar to the one as shown in Figure 1(b). The nodes will be the different sub-components in the EV battery while the linkages between nodes could be sequential relationship between then (i.e. which component needs to be removed before getting access to it).
+
+
+1.1 Project Sponsor
+This project is designed to be a sub-module of our Capstone Project, titled Intelligent Document Processing System, which is proposed by Advanced Remanufacturing and Technology Centre (ARTC).
+1.2 Business Problem Statement
+In the engineering sector, there is high demand for remanufacturing, repurposing and recycling of high value products such as electric vehicle (EV) battery.
+Currently, technicians handling these EV battery would need to navigate through complex service manual, hindering efficiency of the maintenance process. This manual process is error prone and time consuming.
+ 
+Demand and Impact
+Our proposed system which analyse the maintenance manual to retrieve crucial information for the users will result in:
+Improved safety – reduction in human error from reading manual
+Improved efficiency – reduction in maintenance time
+We have 2 modules catered for AI engineer and mechanical engineer. AI Engineer will be building knowledge database using pdf manuals. Mechanical engineer is the consumer of the tool who sill be able to retreive components and the main image.
+
+1.3 Technical Problem Statement
+2 Related Work
+3 Dataset
+4 System Design
+4.1 High level architecture
+4.2 Proposed technical approach
+5 Experimental Design
+5.1 Object detection
+5.2 Optical Character Recognition
+5.3 Segmentation of component
+6 Team and Responsilibilty
+6.1 Jun Ming
+6.2 Sujatha
+7 Project deliverables
+7.1 Project presentation
+As part of the project deliverable, this slides gives you insights on the requirements, design, training and testing of the tool. Click here for the project presentation
+7.2 UI Video Demo
+This video gives a demonstation of the application in details. Click here for UI video demo.
+7.3 UI Github pages illutstration
+This page gives you an idea of our application deliverables without a need to install anything. Click here for  Github pages.
+7.4 Application Github source: 
+8 References
+
+       
+       
+       
+       
+Author Note 
+       Include any grant/funding information and a complete correspondence address. 
+       
+
+Abstract 
+The abstract should be one paragraph of between 150 and 250 words. It is not indented. Section titles, such as the word Abstract above, are now to use bold heading format. References, Footnotes, and Figure section titles should also be written in bold. To do this, use the Section Title style. This style automatically starts your section on a new page, so you don’t have to add page breaks. Note that all of the styles for this template are available on the Home tab of the ribbon, in the Styles dropdown menu. 
+       Keywords: Add keywords here.
+       
+
+Paper Title in Bold at the Top of Page 2 
+       Begin your paper with the paper title at the top of the first page of text. Your title acts as a default Level 1 heading; therefore, it is centered and in bold. Don’t use “Introduction” as your heading as it’s assumed the introduction text will be at the beginning of your paper. The body uses a half-inch first line indent and should be double-spaced. APA style provides for up to five heading levels, shown in the paragraphs that follow. 
+9 Level 1 Heading 
+       Heading levels 1-3 get their own paragraph, as shown. Headings 4 and 5 are run-in headings used at the beginning of the paragraph. Include a period at the end of a run-in heading. Double-space all text, including headings. Use descriptive headings to help readers identify sections of your paper. 
+9.1 Level 2 Heading1 
+       To add a table of contents (TOC), apply the appropriate heading style to just the heading text at the start of a paragraph and it will show up in your TOC. To do this, select the text for your heading. Then, on the Home tab, in the Styles gallery, click the style you need. 
+9.1.1 Level 3 Heading 
+       If needed, you can include consecutive paragraphs with their own headings, where appropriate. For APA Style formatting, type your own references. To correctly format a reference page according to APA Style guidelines, see page five. 
+       Level 4 Heading. When using headings, don’t skip levels. If you need a heading 3, 4, or 5 with no text following it before the next heading, add a period at the end of the heading and start a new paragraph for your subheading and its text. When citing any quote or text that consists of three or more lines, APA guidelines call for block-quote format: 
+       Create a new paragraph to begin the block-quote. Double-space each line of text, as you have  done with headings, section labels, and paragraphs of paraphrased text. To correctly format a block-quote, indent each line of the text to one-half inch. Remember to always cite your source (Last Name, Year). 
+       Last Name (Year) citations can be used when writing a paper in narrative form. Parenthetical citations are also appropriate (Last Name, Year). 
+       Level 5 Heading. Like all sections of your paper, references start on their own page, like the page that follows this one. All in-text citations should also be included your references. 
+       
+
+References 
+Last Name, A. B. (Year). Article Title. Journal Title, Pages #-#. URL. URL.
+Last Name, C. D. (Year). Book TitleBook Title URL.
+Last Name, D. E., Last Name, F. G. (Year). Report TitleReport Title URL.
+Last Name, H. I. (Year, Month Day). Article Title/Headline. Periodical.Periodical.
+Organization Name. (Year, Month Day). Webpage Title. URL.
+       
+
+Footnotes 
+            1For APA reports, add footnotes manually on their own page following references. Do not use the Insert Footnotes method on the References tab as they will not be formatted correctly. For APA formatting requirements, it’s easier to type your own footnote references and notes. To format a footnote reference, select the number and then, on the Home tab, in the Styles gallery, click Footnote Reference. The body of a footnote, such as this example, uses the Normal text style. If you delete this sample footnote, don’t forget to delete its in-text reference at the end of the sample Heading 2 paragraph on the first page of body content in this template. 
+       
+
+Tables 
+Table 1 
+Table Title 
+Column HeadColumn HeadColumn HeadColumn HeadColumn HeadRow Head123123123123Row Head456456456456Row Head789789789789Row Head123123123123Row Head456456456456Row Head789789789789       
+Note: Place all tables for your paper in a tables section, following references and footnotes. Start a new page for each table, include a table number and table title for each, as shown. All explanatory text appears in a table note that follows the table, like this one. Use the Table/Figure style, available on the Home tab, in the Styles gallery, to get the spacing between table and note. Tables in APA format can use single or 1.5 line spacing. Include a heading for every row and column, even if the content seems obvious. A default table style has been set up for this template that fits APA guidelines. To insert a table, on the Insert tab, click Table.
+       
+
+       Figures Title 
+Figure 1. 
+Include all figures in their own section, following references, footnotes, and tables. Include a numbered caption for each figure. Use the Table/Figure style for easy spacing between figure and caption.
+
+
+       
+       
+       
+       
+       
+       
+       For additional information on APA Style formatting, please consult the APA Style Manual, 7th Edition.
+Intelligent Document Processing System2
+       
+
+       
+Intelligent Document Processing System
+Authors: Sujatha Sureshkumar , Tan Jun Ming
+       
+
+       
