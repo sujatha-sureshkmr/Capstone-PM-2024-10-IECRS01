@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Index</title>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="../static/vendor/bootstrap/css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+
+    <style>
+        .codeDiv {
+            border: 1px #0000006e;
+            background-color: #f8f8f8;
+            text-align: left;
+            vertical-align:text-bottom;
+            color: #da467d;
+        }
+        pre {
+        position: relative;
+        background: #d3d6db;
+        padding: 10px;
+        font-size: 15px;
+        word-wrap: break-word;
+        white-space: pre-wrap;
+        border: 1px solid #e6e7e9;
+        
+        }
+        .copy-button {
+            position: absolute;
+            top: 2px;
+            right: 10px;
+            cursor: pointer;
+            color: #fff;
+            background: gray;
+            border-radius: 0.5em;
+            padding: 2px 7px;
+            }
+
+        .copy-button:hover {
+        color: #000;
+        }
+    </style>
+    <script>
+        function copyToClipboard(element) {
+            // Get the <pre> element
+            const preTag = document.getElementById(element);
+        
+            // Create a copy button element
+            const copyButton = document.createElement("span");
+            copyButton.innerText = "Copy";
+            copyButton.classList.add("copy-button");
+        
+            // Append the copy button to the <pre> tag
+            preTag.appendChild(copyButton);
+        
+            // Add click event listener to the copy button
+            copyButton.addEventListener("click", () => {
+                // Hide the copy button temporarily
+                copyButton.style.display = "none";
+        
+                // Create a range and select the text inside the <pre> tag
+                const range = document.createRange();
+                range.selectNode(preTag);
+                window.getSelection().removeAllRanges();
+                window.getSelection().addRange(range);
+        
+                try {
+                    // Copy the selected text to the clipboard
+                    document.execCommand("copy");
+        
+                    // Alert the user that the text has been copied
+                    copyButton.innerText = "Copied!";
+                    setTimeout(function() {
+                        copyButton.innerText = "Copy";
+                    }, 2000);
+                } catch (err) {
+                    console.error("Unable to copy text:", err);
+                } finally {
+                    // Show the copy button again
+                    copyButton.style.display = "inline";
+        
+                    // Deselect the text
+                    window.getSelection().removeAllRanges();
+                }
+            });
+        }
+        </script>
+</head>
+
+<body class="sb-nav-fixed">
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" href="{{ url_for('index') }}">NUS Capstone 2024</a>
+
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i
+                class="fas fa-bars"></i></button>
+        <a class="navbar-brand ps-3" href="{{ url_for('index') }}">Intelligent Document Processing System</a>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a class="nav-link" href="{{ url_for('index') }}">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Overview
+                        </a>
+                        <a class="nav-link" href="https://www.youtube.com/watch?v=43cFbTThXIM">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Demo
+                        </a>
+                        <div class="sb-sidenav-menu-heading">AI Engineer Module</div>
+                        <a class="nav-link" href="./aienginnerguide.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            AI Engineer Handbook
+                        </a>
+                        <a class="nav-link" href="./aidocumentprocessing.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Document Processing
+                        </a>
+                        <a class="nav-link" href="./aimodeltraining.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Model Training
+                        </a>
+                        <div class="sb-sidenav-menu-heading">Mech Enginner Module</div>
+                        <a class="nav-link" href="./mechenginnerguide.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Mech Engineer Handbook
+                        </a>
+                        <a class="nav-link" href="./mechchatbotmanual.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Chatbot - Manual
+                        </a>
+                        <a class="nav-link" href="./chatbot.html">
+                            <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
+                            Chatbot - LLM
+                        </a>
+                    </div>
+                </div>
+                <div class="sb-sidenav-footer">
+                    <div class="small">NUS ISS Capstone 2024 PT</div>
+                    <div class="small">Group 1</div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    <h1 class="mt-4">Mechanical Engineer Handbook</h1>
+
+                    <ol class="breadcrumb mb-4">
+                        <!--<li class="breadcrumb-item active">
+                            <h4>Executive Summary</h4>
+                        </li>-->
+                    </ol>
+                    <div class="card mb-4">
+                        <div class="card-header">
+                            <i class="fas fa-book-open"></i>
+                            Mechanical Engineer Handbook </br> <b>Authors: Sujatha Sureshkumar, Tan Jun Ming, Gwen Foong Yuet Yan</b>
+                        
+                        </div>
+                        <div class="card-body">
+                           
+                            <div>
+                                 <h2><b>Installation Libraries</b></h2>
+                                 <script src="https://gist.github.com/sujatha-sureshkmr/8b30c9b84a28b44449c98d9f3cc7cd9a.js"></script>
+                                 <br>
+                                 <h2><b>Download source from github</b></h2>
+                                 <div class="codeDiv" onclick="copyToClipboard('myPreTag')">
+                                    <pre id="myPreTag">git lfs install</pre>
+                                    <script src="script.js"></script>
+                                 </div>
+                                 <div class="codeDiv" onclick="copyToClipboard('myPreTag1')">
+                                    <pre id="myPreTag1">git lfs clone https://github.com/sujatha-sureshkmr/Capstone-PM-2024-10-IECRS01.git</pre>
+                                    <script src="script.js"></script>
+                                 </div>
+                                </br>
+                                <h2><b>Run Flask</b></h2>
+                                <h5>Go to Capstone-PM-2024-10-IECRS01 folder location</h5>
+                                <div class="codeDiv" onclick="copyToClipboard('myPreTag3')">
+                                    <pre id="myPreTag3">set FLASK_APP=app <br>set FLASK_DEBUG=1 <br>flask run</pre>
+                                    <script src="script.js"></script>
+                                 </div>
+
+                         <h2><b>Mech Engineer Module -> Chatbot - Manual</b></h2>
+                                <h6>Let us begin to look into extracted knowledge graph.</h6>
+                                <h6>Choose product type, product manufacturer and manufactured year and click <b> Fetch Components</b>. This step brings in the main and sub components for the particular guide.</h6>
+                                <img src="../static/vendor/img/img_mod_train_1.png" alt="Usecase" class="center" />
+                                <br>
+                                <h6>Choose main component and sub component to retrieve the knowledge db</h6>
+                                <img src="../static/vendor/img/img_mod_train_2.png" alt="Usecase" class="center" />
+                                <br>
+                                <h6>This warning shows when the chosen main compoent and sub components doesnt match with our records. No worries, we still display the knowledge graph based on sub component</h6>
+                                <img src="../static/vendor/img/img_mod_train_3_a.png" alt="Usecase" class="center" />
+                                <br>
+                                <h6>There can be instances where our knowledge graph brings in multiple images for the same component. Those records are displayed here for you to update. We have displayed the folder location of the knowledge graph for you to revise it.</h6>
+                                <img src="../static/vendor/img/img_mod_train_3.png" alt="Usecase" class="center" />
+                                <br>
+                                <h6>This picture shows knowledge graph of the component that you have chosen.</h6>
+                                <img src="../static/vendor/img/img_mod_train_4.png" alt="Usecase" class="center" />
+                                <br>
+                                <h6>This picture knows detailed knowledge graph with components and its images.</h6>
+                                <img src="../static/vendor/img/img_mod_train_5.png" alt="Usecase" class="center" />
+
+                            </div>
+
+                            
+                        </div>
+
+                    </div>
+
+                  
+                </div>
+            </main>
+            <footer class="py-4 bg-light mt-auto">
+                <div class="container-fluid px-4">
+                    <div class="d-flex align-items-center justify-content-between small">
+                        <div class="text-muted">Copyright &copy; NUS-ISS</div>
+                        <div>
+                            <a href="https://nus.edu.sg/ormc/compliance/personal-data-protection-at-nus/nus-privacy-notice">Privacy Policy</a>
+                            &middot;
+                            <a href="https://www.nus.edu.sg/uhc/terms-conditions">Terms of use</a>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="assets/demo/chart-area-demo.js"></script>
+    <script src="assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/umd/simple-datatables.min.js"
+        crossorigin="anonymous"></script>
+    <script src="js/datatables-simple-demo.js"></script>
+</body>
+
+</html>

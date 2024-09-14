@@ -1,0 +1,74 @@
+Component - jscia0761gb
+Component - service plug switch
+Component - service plug switch bracket
+Component - highvoltage battery harness
+Component - bus bar nut cap
+Component - bus bar
+Component - bus bar integrate noise filter
+Component - battery junction box
+Component - harness bracket
+Component - vehicle communication harness
+Component - snap ring
+Component - ptc heater harness connector
+Component - highvoltage harness connector
+Component - connector flange
+Component - seal
+Component - voltage detection harness
+Component - battery current sensor integrate
+Component - : always replace every disa
+Component - : n·m kgm inlb
+Component - danger electric shock fire never contact bus bar wrong terminal
+Component - jscia0874zz
+Component - : battery front
+Component - since hybrid vehicle electric vehicle contain high voltage battery risk
+Component - prevent electric shock wear insulate protective
+Component - jscia0708zz
+Component - danger electric shock cause
+Component - jscia0709zz
+Component - danger electric shock sure
+Component - disconnect highvoltage
+Component - jscia0590zz
+Component - jscia0710zz
+Component - remove ptc heater har
+Component - evb
+Component - jscia0592zz
+Component - liion battery heater harness connector
+Component - g
+Component - jscia0762zz
+Component - j
+Component - jscia0727zz
+Component - remove
+Component - n
+Component - jscia0728zz
+Component - p
+Component - remove highvoltage
+Component - open bus bar cover
+Component - jscia0712zz
+Component - remove bus bar
+Component - jscia0713zz
+Component - risk electric shock immedi
+Component - danger electric shock sure close bus bar cover remove
+Component - remove junction box
+Component - jscia0595zz
+Component - jscia0657zz
+Component - jscia0596zz
+Component - mount bolt
+Component - jscia0597zz
+Component - current sensor mount bolt
+Component - remove service plug switch
+Component - k
+Component - jscia0598zz
+Component - l
+Component - remove highvoltage harness
+Component - jscia0764zz
+Component - : harness clip
+Component - danger electric shock cause contact terminal sure wear
+Component - jscia0765zz
+Component - prevent electric shock wear insulate protective gear use insulate tool
+Component - danger electric shock fire never allow bus bar contact wrong ter
+Component - install bus bar correct position
+Component - extreme
+Component - correct position
+Component - wrong position
+Component - air leak inspection
+Component - electric equipotential test

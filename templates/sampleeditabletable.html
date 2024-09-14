@@ -1,0 +1,40 @@
+<!-- Editable table -->
+                                        {% if data %}
+                                        {% if data %}
+                                        <form method="post" action="/save">
+                                            <table border="1">
+                                                <tr>
+                                                    <th>Index</th>
+                                                    <!-- Add column headers here -->
+                                                    {% for column in columns %}
+                                                        <th>{{ column }}</th>
+                                                    {% endfor %}
+                                                </tr>
+                                                {% for index, row in data %}
+                                                    <tr>
+                                                        <td>{{ index }}</td>
+                                                        <!-- Add data values here -->
+                                                        {% for key, value in row.items() %}
+                                                            <td>
+                                                                {% if key == 'image_name' %}
+                                                                    <a href="{{ value }}" target="_blank">Click here for image</a>
+                                                                {% else %}
+                                                                    <input type="text" name="{{ index }}_{{ key }}" value="{{ value }}">
+                                                                {% endif %}
+                                                            </td>
+                                                        {% endfor %}
+                                                    </tr>
+                                                {% endfor %}
+                                            </table>
+                                        </form>
+                                    {% endif %}
+                                            </table>
+                                            <!--<button type="submit" name="save" class="btn btn-success btn-lg btn-block">Submit</button>-->
+                                        </form>
+                                    {% else %}
+                                        <p>No data available.</p>
+                                    {% endif %}
+                                    {% for item in knowledgedbgraph %}
+                                    <li><img src="{{item}}" width="500" height="600"></li>
+                                    {% endfor %}
+                                    
